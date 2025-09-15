@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  username  String
+  imageUrl  String?  // Novo campo para a imagem do usuário
+  isAdmin   Boolean  @default(false)
+  movies    Movie[]
+  favorites Favorite[]
+}
+
+model Genre {
+  id     Int    @id @default(autoincrement())
+  name   String @unique
+  movies Movie[]
+}
+
+model Movie {
+  id          Int      @id @default(autoincrement())
+  title       String
+  synopsis    String   @db.Text
+  imageUrl    String?  // Novo campo para a imagem do filme (capa)
+  author      String
+  releaseDate DateTime @db.Date
+  genreId     Int
+  userId      Int
+  genre       Genre    @relation(fields: [genreId], references: [id])
+  user        User     @relation(fields: [userId], references: [id])
+  favorites   Favorite[]
+}
+
+model Favorite {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  movieId   Int
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  movie     Movie    @relation(fields: [movieId], references: [id])
+  @@unique([userId, movieId])
+}
