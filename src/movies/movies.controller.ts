@@ -15,7 +15,4 @@ export class MoviesController {
     async findOne(@Param('id') id:string){
         return await this.moviesService.findOne(+id);
     }
-
-
-    
 }

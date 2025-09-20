@@ -48,6 +48,7 @@ export class AuthService {
             throw new UnauthorizedException("Credenciais invalidas");
         }
         const token =  await this.jwtService.signAsync({id:usuario.id, email:usuario.email, isAdmin:usuario.isAdmin});
+        
          return {token};
      }
 }
