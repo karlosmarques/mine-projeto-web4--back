@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { pesquisaDto } from './dtos/pesquisa';
+import { retry } from 'rxjs';
 
 @Injectable()
 export class MoviesService {
@@ -21,6 +23,18 @@ export class MoviesService {
             throw new Error("Filme não encontrado");
         }
         return movie;
+    }
+
+    async pesquisa(data:pesquisaDto) {
+       const findmovie = await this.prisma.movie.findMany({
+            where: {
+                title: data.title
+            },
+            include: {
+                genre: true
+            }
+       })
+       return findmovie
     }
 
 }
