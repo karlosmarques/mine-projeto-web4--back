@@ -9,15 +9,15 @@ export class UsersController {
     constructor(private usersService: UsersService){}
   
     @UseGuards(AuthGuard)
-    @Get(':id')
-    async findOne(@Param('id') id: string){
-        return await this.usersService.findOne(+id);
+    @Get('me')
+    async findOne(@Request() req){
+        return await this.usersService.findOne(req.user.id);
     }
 
     @UseGuards(AuthGuard)
-    @Patch(':id')
-    async update(@Param('id')id:string,@Body() Body:UpdateUserDto){
-        return await this.usersService.update(+id,Body);
+    @Patch('me')
+    async update(@Request() req,Body:UpdateUserDto){
+        return await this.usersService.update(req.user.id,Body);
     }
 
 }
