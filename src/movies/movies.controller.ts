@@ -8,18 +8,18 @@ export class MoviesController {
 
     constructor(private moviesService: MoviesService) {}
     
-  
+      @UseGuards(AuthGuard)
     @Get()
     async findAll(){
         return await this.moviesService.findAll();
     }
 
-    
+    @UseGuards(AuthGuard)
     @Get(':id')
     async findOne(@Param('id') id:string){
         return await this.moviesService.findOne(+id);
     }
-
+    @UseGuards(AuthGuard)
     @Post('pesquisa')
     async pesqusa(@Body() Body:pesquisaDto) {
         return await this.moviesService.pesquisa(Body);
