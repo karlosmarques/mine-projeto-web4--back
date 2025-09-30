@@ -23,8 +23,8 @@ export class MailService {
       to: email, 
       subject: 'Recuperação de Senha',
       html: `
-        <p>Você solicitou a recuperação de senha.</p>
-        <p>Clique no link abaixo para redefinir sua senha:</p>
+        <p>Você solicitou a recuperação de senha né pai, mude imediatemente.</p>
+        <p>Clique no link abaixo ai</p>
         <a href="${resetLink}">${resetLink}</a>
         <p>se não for você meta o pé vá.</p>
       `,
