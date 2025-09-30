@@ -8,11 +8,12 @@ import { MoviesModule } from './movies/movies.module';
 import { FavoritesModule } from './favorites/favorites.module';
 import { MoviesService } from './movies/movies.service';
 import { FavoritesService } from './favorites/favorites.service';
+import { MailModule } from './mail/mail.module';
 
 
 
 @Module({
-  imports: [AuthModule, UsersModule, MoviesModule, FavoritesModule],
+  imports: [AuthModule, UsersModule, MoviesModule, FavoritesModule, MailModule],
   controllers: [],
   providers: [AuthService, PrismaService, UsersService, FavoritesService, MoviesService],
 })
