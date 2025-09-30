@@ -4,9 +4,10 @@ import { AuthService } from './auth.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { JwtModule } from '@nestjs/jwt';
 import { JWT_SECRET } from './constants';
+import { MailModule } from '../mail/mail.module';
 
 @Module({
-  imports: [JwtModule.register({global:true, secret:JWT_SECRET.secret, signOptions:{expiresIn:"7200s"}})],
+  imports: [JwtModule.register({global:true, secret:JWT_SECRET.secret, signOptions:{expiresIn:"7200s"}}),MailModule],
   controllers: [AuthController],
   providers: [AuthService,PrismaService]
 })
