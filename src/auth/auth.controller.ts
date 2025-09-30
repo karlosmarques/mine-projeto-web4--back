@@ -21,13 +21,13 @@ export class AuthController {
        
     }
 
-    @Post('forgot-password')
+    @Post('esqueceusenha')
     async forgotPassword(@Body('email') email: string) {
         return await this.authService.forgotPassword(email);
     }
 
     // Rota para redefinir senha
-    @Post('reset-password')
+    @Post('redefinirsenha')
     async resetPassword(@Body('token') token: string,@Body('newPassword') newPassword: string,) {
         return await this.authService.resetPassword(token, newPassword);
     }
