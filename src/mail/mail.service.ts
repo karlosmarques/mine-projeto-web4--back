@@ -19,14 +19,14 @@ export class MailService {
     const resetLink = `http://localhost:3000/auth/reset-password?token=${token}`;
 
     await this.transporter.sendMail({
-      from: `"Suporte" <${process.env.MAIL_USER}>`,
+      from: `"Respeita a lei pai" <${process.env.MAIL_USER}>`,
       to: email, 
       subject: 'Recuperação de Senha',
       html: `
         <p>Você solicitou a recuperação de senha.</p>
         <p>Clique no link abaixo para redefinir sua senha:</p>
         <a href="${resetLink}">${resetLink}</a>
-        <p>Se não foi você, ignore este email.</p>
+        <p>se não for você meta o pé vá.</p>
       `,
     });
   }
