@@ -21,10 +21,15 @@ export class AuthController {
        
     }
 
-    @UseGuards(AuthGuard)
-    @Get("me")
-    async me(@Request() request){
-        return request.user;
+    @Post('forgot-password')
+    async forgotPassword(@Body('email') email: string) {
+        return await this.authService.forgotPassword(email);
+    }
+
+    // Rota para redefinir senha
+    @Post('reset-password')
+    async resetPassword(@Body('token') token: string,@Body('newPassword') newPassword: string,) {
+        return await this.authService.resetPassword(token, newPassword);
     }
 }
 
