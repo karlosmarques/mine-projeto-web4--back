@@ -1,0 +1,33 @@
+import { Injectable } from '@nestjs/common';
+import * as nodemailer from 'nodemailer';
+
+@Injectable()
+export class MailService {
+  private transporter;
+
+  constructor() {
+    this.transporter = nodemailer.createTransport({
+      service: 'gmail', 
+      auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS,
+      },
+    });
+  }
+
+  async sendPasswordReset(email: string, token: string) {
+    const resetLink = `http://localhost:3000/auth/reset-password?token=${token}`;
+
+    await this.transporter.sendMail({
+      from: `"Suporte" <${process.env.MAIL_USER}>`,
+      to: email, 
+      subject: 'Recuperação de Senha',
+      html: `
+        <p>Você solicitou a recuperação de senha.</p>
+        <p>Clique no link abaixo para redefinir sua senha:</p>
+        <a href="${resetLink}">${resetLink}</a>
+        <p>Se não foi você, ignore este email.</p>
+      `,
+    });
+  }
+}
