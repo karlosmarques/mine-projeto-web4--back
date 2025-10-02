@@ -1,4 +1,4 @@
-import { Controller, Param, Post, Get, UseGuards, Req } from '@nestjs/common';
+import { Controller, Param, Post, Get, UseGuards, Req, Request,Delete,ParseIntPipe } from '@nestjs/common';
 import { FavoritesService } from "./favorites.service"
 import { AuthGuard } from 'src/auth/auth.guard';
 
@@ -12,11 +12,18 @@ export class FavoritesController {
         const user = req.user
         return await this.favoriteService.favorite(+movieID,user.id);
     }
+    
     @UseGuards(AuthGuard)
     @Get("favoriteall")
     async findAll(@Req() req){
         const user = req.user
         return await this.favoriteService.findAll(user.id);
+    }
+
+    @UseGuards(AuthGuard)
+    @Delete(":id")
+    async removeFavorite(@Request() req, @Param('id', ParseIntPipe) movieId: number) {
+    return this.favoriteService.removeFavorite(req.user.id, movieId);
     }
 
 }

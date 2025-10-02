@@ -15,8 +15,8 @@ export class UsersController {
     }
 
     @UseGuards(AuthGuard)
-    @Patch('me')
-    async update(@Request() req,Body:UpdateUserDto){
+    @Patch('alterar')
+    async update(@Request() req,@Body() Body:UpdateUserDto){
         return await this.usersService.update(req.user.id,Body);
     }
 

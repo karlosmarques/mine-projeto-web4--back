@@ -23,7 +23,7 @@ export class UsersService {
 
    async update(id:number,data:UpdateUserDto){
         const user = await this.prisma.user.update({
-            where:{id},data
+            where:{id},data:{...data}
         })
         if(!user){
             throw new NotFoundException("Usuario não encontrado");
