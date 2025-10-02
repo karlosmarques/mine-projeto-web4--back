@@ -33,6 +33,7 @@ model Movie {
   synopsis    String   @db.Text
   imageUrl    String?  // Novo campo para a imagem do filme (capa)
   author      String
+  movieLink   String
   releaseDate DateTime @db.Date
   genreId     Int
   userId      Int
